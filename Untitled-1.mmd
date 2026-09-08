@@ -1,0 +1,43 @@
+---
+references:
+  - "File: /src/App.jsx"
+  - "File: /src/main.jsx"
+  - "File: /vite.config.js"
+generationTime: 2026-08-23T18:46:35.568Z
+---
+flowchart TD
+    A["vite.config.js: defineConfig"] --> B["Configure Vite with React plugin"]
+    B -.-> C["Build and serve React application"]
+
+    D["src/main.jsx: createRoot"] --> E["Find DOM element with id root"]
+    E --> F["Render StrictMode"]
+    F --> G["Render App component"]
+
+    G --> H["Initialize menuOpen = false"]
+    G --> I["Initialize submitted = false"]
+    H --> J["Render page sections and navigation"]
+    I --> J
+
+    J --> K{"User toggles navigation menu"}
+    K -->|Open or close| L["setMenuOpen with opposite value"]
+    L --> J
+    J --> M{"User selects navigation link"}
+    M -->|Any navigation link| N["closeMenu sets menuOpen = false"]
+    N --> J
+
+    J --> O["Render expertise items"]
+    O --> P["Map over four expertise areas"]
+    P --> O
+
+    J --> Q["User submits appointment form"]
+    Q --> R["Prevent default form submission"]
+    R --> S["setSubmitted true"]
+    S --> T{"submitted is true"}
+    T -->|Yes| U["Render request received message"]
+    T -->|No| V["Render appointment form"]
+    U --> W{"User sends another request"}
+    W -->|Yes| X["setSubmitted false"]
+    X --> V
+    V --> Q
+
+    C -.-> D
